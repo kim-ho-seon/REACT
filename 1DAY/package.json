@@ -1,0 +1,17 @@
+{
+  "name": "1day",
+  "version": "1.0.0",
+  "main": "cowsay.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "react": "^18.3.1"
+  }
+}

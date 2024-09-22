@@ -1,0 +1,8 @@
+{
+    "_comment": " json-server --port 3002 db2.json",
+    "data": [
+        {"id": 1, "content": "서버 연습은"},
+        {"id": 2, "content": "joson-server를 쓰면"},
+        {"id": 3, "content": "편리하답니다!"}
+    ]
+}
