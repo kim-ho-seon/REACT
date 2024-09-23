@@ -1,6 +1,10 @@
+import { useDispatch, useSelector } from "react-redux"
 import data from "../assets/data"
+import { removeFromCart } from "../redux/redux"
 
-function Cart ({menu, cart, setCart}) {
+function Cart () {
+   const menu =  useSelector(state => state.menuReducer)
+   const cart = useSelector(state => state.cartReducer)
     if (!menu) return (<div style={{textAlign:"center", margin: '80px'}}> 메뉴 정보가 없어요!</div>)
     const allMenus = [...menu.커피, ...menu.논커피]
     return (
@@ -12,15 +16,14 @@ function Cart ({menu, cart, setCart}) {
                     item={allMenus.find(menu => menu.id === el.id)} 
                     options={el.options} 
                     quantity={el.quantity}
-                    setCart={setCart}
-                    cart={cart}
                 />) : <div className="no-item">장바구니에 담긴 상품이 없어요!</div>}
             </ul>
         </>
     )
 }
 
-function CartItem ({item, options, quantity, setCart, cart}) {
+function CartItem ({item, options, quantity}) {
+    const dispatch = useDispatch()
     return (
         <li className='cart-item'>
             <div className="cart-item-info">
@@ -32,7 +35,7 @@ function CartItem ({item, options, quantity, setCart, cart}) {
                 <div>개수 : {quantity}</div>
             </div>
             <button className="cart-item-delete" onClick={() => {
-                setCart(cart.filter(el=>el.id !== item.id))
+               dispatch(removeFromCart(item.id))
             }}>삭제</button>
         </li>
     )
