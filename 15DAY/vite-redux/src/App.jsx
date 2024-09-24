@@ -2,6 +2,8 @@ import './App.css'
 import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import $thunk from 'redux-thunk'
+// redux-thunk에서 내보내는것이 여러개라서 {} 를 사용해 구조분해
+// import {thunk} from 'redux-thunk'
 
 const increment1 = {
   type: "increment1"
