@@ -10,7 +10,7 @@ function App() {
    useCallback((number) =>{
     console.log("plus1 실행 됨(plus1 함수 생성)");
     return number + 1;
-  }, [] );
+  }, [rerender] );
   // (number) =>{
   //   console.log("plus1 실행 됨(plus1 함수 생성)");
   //   return number + 1;
@@ -19,7 +19,7 @@ function App() {
   const numberPlus1 = useMemo(() => {
     console.log("useMemo 실행(plus1 함수 호출)")
     return plus1(number)
-  }, [number]);
+  }, [rerender]);
   
   useEffect(()=>{
     // plus1 함수가 변경 될 때 실행
