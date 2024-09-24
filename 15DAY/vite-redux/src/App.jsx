@@ -1,7 +1,7 @@
 import './App.css'
 import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { thunk } from 'redux-thunk'
+import $thunk from 'redux-thunk'
 
 const increment1 = {
   type: "increment1"
@@ -43,7 +43,7 @@ const counter2Reducer = (state = 1, action) => {
 
 const rootReducer = combineReducers({ counter1Reducer, counter2Reducer })
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+export const store = legacy_createStore(rootReducer, applyMiddleware($thunk))
 
 function App() {
   console.log("App component re-rendered"); // 렌더링 시점 확인
