@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css'
 
 function App() {
@@ -6,10 +6,15 @@ function App() {
   // 리렌더를 발생시키는 용도
   const [ rerender, setRerender ] = useState(false);
 
-  const plus1 = (number) =>{
+  const plus1 =
+   useCallback((number) =>{
     console.log("plus1 실행 됨(plus1 함수 생성)");
     return number + 1;
-  };
+  }, [] );
+  // (number) =>{
+  //   console.log("plus1 실행 됨(plus1 함수 생성)");
+  //   return number + 1;
+  // };
 
   const numberPlus1 = useMemo(() => {
     console.log("useMemo 실행(plus1 함수 호출)")
@@ -18,7 +23,7 @@ function App() {
   
   useEffect(()=>{
     // plus1 함수가 변경 될 때 실행
-    console.log("plus1 생성됨")
+    console.log("useEffect(plus1 생성됨)")
   }, [plus1])
 
   return (
