@@ -11,7 +11,7 @@ export const fechMultiplePokemonById = createAsyncThunk("pokemon/fechMultiplePok
     const data = await response.json();
     // console.log(data.names.find(el=>el.language.name === 'ko').name);
     // console.log(data.flavor_text_entries.find(el=>el.language.name === 'ko').flavor_text);
-    // 1~151
+    // 1~152
     const pokemonData = {
       id: pokemonId,
       name: data.names.find((el) => el.language.name === "ko").name,

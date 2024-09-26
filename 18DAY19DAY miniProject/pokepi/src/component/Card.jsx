@@ -1,5 +1,6 @@
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import FavoriteButton from "./FavoriteButton"
 
 const CardContainer = styled.section`
     width: 150px;
@@ -11,17 +12,21 @@ const CardContainer = styled.section`
     gap: 10px;
     padding-bottom: 10px;
     border-radius: 10px;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+
     img{
         width: 120px;
     }
-
 `
 export const Card = ({pokemon}) => {
-    const naigate = useNavigate()
+    const navigate = useNavigate()
     return (
-        <CardContainer onClick={()=>naigate(`/detail/${pokemon.id}`)}>
+        <CardContainer onClick={()=>navigate(`/detail/${pokemon.id}`)}>
             <img src={pokemon.front} alt="" />
-            <div>{pokemon.name}</div>
+            <div>{pokemon.name}
+                <FavoriteButton pokemonId={pokemon.id}/>
+            </div>
         </CardContainer>
     )
 }
