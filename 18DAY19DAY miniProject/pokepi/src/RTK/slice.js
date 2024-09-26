@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ffechMultiplePokemonByI } from "./thunk";
+import { fechMultiplePokemonById } from "./thunk";
 
 export const pokemonSlice = createSlice({
     name: 'pokemon',
@@ -8,16 +8,16 @@ export const pokemonSlice = createSlice({
         loading: true,
     },
     reducers: { }, //동기적 상태 변경
-    extraReducers: //비동기적 상태 변경
+    extraReducers:
     (builder) => {
         builder
-        .addCase(ffechMultiplePokemonByI.pending, (state)=>{
+        .addCase(fechMultiplePokemonById.pending, (state)=>{
             state.loading = true;
         })
-        .addCase(ffechMultiplePokemonByI.rejected, (state)=>{
+        .addCase(fechMultiplePokemonById.rejected, (state)=>{
             state.loading = false;
         })
-        .addCase(ffechMultiplePokemonByI.fulfilled, (state, action)=>{
+        .addCase(fechMultiplePokemonById.fulfilled, (state, action)=>{
             state.loading = false;
             state.data = action.payload
         })
