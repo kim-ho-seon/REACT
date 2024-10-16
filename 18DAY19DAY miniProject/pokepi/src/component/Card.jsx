@@ -21,7 +21,7 @@ const CardContainer = styled.section`
     }
 `
 export const Card =memo (({ pokemon }) => {
-    console.log('card', pokemon.id)
+    //console.log('card', pokemon.id)
     const [isImageLoading, setIsImageLoading] = useState(true)
     const navigate = useNavigate()
     return (

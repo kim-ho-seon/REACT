@@ -5,10 +5,13 @@ export const fechMultiplePokemonById = createAsyncThunk("pokemon/fechMultiplePok
   // console.log(numberArray)
 
   const fetchAPI = async (pokemonId) => {
+    console.log('==============' + pokemonId)
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`
     );
     const data = await response.json();
+
+   
     // console.log(data.names.find(el=>el.language.name === 'ko').name);
     // console.log(data.flavor_text_entries.find(el=>el.language.name === 'ko').flavor_text);
     // 1~152
