@@ -4,6 +4,7 @@
   "main": "cowsay.js",
   "type": "module",
   "scripts": {
+    "cowsay": "cowsay -e -- -T U oz Coding",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cowsay": "^1.6.0",
     "dayjs": "^1.11.13",
     "react": "^18.3.1"
   }

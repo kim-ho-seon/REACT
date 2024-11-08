@@ -1,4 +1,8 @@
-const dayjs = require("dayjs")
+
+//  commonJS
+// const dayjs = require("dayjs")
+// ES "type":"modeul"
+import dayjs from "dayjs";
 
 const now = dayjs();
 console.log(now.toString());

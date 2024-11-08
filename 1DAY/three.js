@@ -1,4 +1,9 @@
-const multiply = require ("./multiply.js");
+//  Common JS
+// const multiply = require ("./multiply.js");
+
+// ES6
+import multiply from "./multiply.js";
+
 multiply( 3, 1);
 multiply( 3, 2);
 multiply( 3, 3);
