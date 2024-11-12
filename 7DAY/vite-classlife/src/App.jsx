@@ -1,18 +1,22 @@
 import { Component, useState } from 'react'
 import './App.css'
 
-function App () {
+// 언마운트 확인
+function App () { 
   const [showCounter, setShowCounter] = useState(false)
   return (
     <>
       {showCounter && <Counter />}
+      <hr/>
       <button onClick={() => setShowCounter((prev) => !prev)}>show?</button>
     </>
   );
 }
 
-class Counter extends Component {
-  constructor(){
+// constructor 인스턴스 생성 시 사용
+// 리랜더링 마운트 확인
+class Counter extends Component { 
+  constructor(){ 
     super();
     this.state = { counter: 1 }
     console.log("constructor");
@@ -29,6 +33,7 @@ class Counter extends Component {
   }
   render() {
     console.log("render")
+
     return (
       <>
         <div>counter : {this.state.counter}</div>
@@ -40,4 +45,4 @@ class Counter extends Component {
     );
   }
 }
-export default App
+export default App;
