@@ -24,7 +24,7 @@ function Counter () {
   useEffect(()=>{
     console.log('리렌더링 ... ')
   })
-  // 3. 특정 상태값이 변할 때 에만 조작하고 싶다
+  // 3. 특정 상태값이 변할 때에만 조작하고 싶다
   useEffect(()=>{
     console.log("counter1의 값이 변할 때")
   }, [counter1]);
@@ -33,14 +33,15 @@ function Counter () {
   }, [counter2])
   //  4. 컴포넌트가 최종적으로 언마운트 될 때 조작하고 싶다
    useEffect(()=>{
-    console.log("useEffect");
+    // console.log("useEffect");
     return () => {
       console.log("컴포넌트 언마운트");
     }
-   });
+   },[]);
+
     return (
       <>
-        <div>counter : {counter1}</div>
+        <div>counter1 : {counter1}</div>
         <button onClick={() => setCounter1( counter1 + 1)}>+1</button>
         <div>counter2 : {counter2}</div>
         <button onClick={() => setCounter2( counter2 - 1 )}>-1</button>
