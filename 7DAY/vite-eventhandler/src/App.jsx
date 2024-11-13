@@ -1,50 +1,103 @@
-import { Component, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
-function App () {
-  const [showCounter, setShowCounter] = useState(false);
+function App() {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:3000/data')
+      .then((res) => res.json())
+      // .then((res)=>console.log(res));
+      .then((res) => setData(res));
+  }, []) // 처음에 렌더링 될때만 데이터 받아오기
+
   return (
     <>
-      {showCounter && <Counter />}
-      <br />
-      <button onClick={() => setShowCounter((prev) => !prev)}>show?</button>
+      <div>데이터 목록</div>
+      {data.map((el) => (
+        <div key={el.id}>{el.content}</div>
+      ))}
+      <MouseFolloser />
+      <ScrollIndicator />
+      <AlertTimer />
+      <div style={{ height: "300vh" }}></div>
     </>
   );
 }
+const MouseFolloser = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-function Counter () {
-  const [counter1, setCounter1] = useState(1);
-  const [counter2, setCounter2] = useState(100);
-
-  // 1. 컴포먼트가 최초로 렌더링 될 때만 조작을 하고싶다
-  useEffect(()=>{
-    console.log("맨 처음 렌더링 될 때")
-  }, [] )
-  // 2. 컴포넌트가 리렌더링 될 때 조작하고 싶다
-  useEffect(()=>{
-    console.log('리렌더링 ... ')
-  })
-  // 3. 특정 상태값이 변할 때 에만 조작하고 싶다
-  useEffect(()=>{
-    console.log("counter1의 값이 변할 때")
-  }, [counter1]);
-  useEffect(()=>{
-    console.log("counter2의 값이 변할 때")
-  }, [counter2])
-  //  4. 컴포넌트가 최종적으로 언마운트 될 때 조작하고 싶다
-   useEffect(()=>{
-    console.log("useEffect");
-    return () => {
-      console.log("컴포넌트 언마운트");
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setPosition({ x: event.clientX, y: event.clientY });
+      console.log("mouseMoved!!")
     }
-   });
-    return (
-      <>
-        <div>counter : {counter1}</div>
-        <button onClick={() => setCounter1( counter1 + 1)}>+1</button>
-        <div>counter2 : {counter2}</div>
-        <button onClick={() => setCounter2( counter2 - 1 )}>-1</button>
-      </>
-    );
+    window.addEventListener('mouseover', handleMouseMove);
+    return () => {
+      window.removeEventListener('mouseover', handleMouseMove);
+    };
+  });
+
+  return (
+    <div style={{
+      position: "fixed",
+      top: position.y, left: position.x,
+      width: "15px", height: "15px",
+      borderRadius: "50%",
+      backgroundColor: "yellowgreen",
+      transform: "translate(-50%, -50%)",
+      pointerEvents: "none"
+    }}></div>
+  )
 }
-export default App
+
+const ScrollIndicator = () => {
+  const [scrollWidth, setScrollWidth] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      const windowHeight =
+        document.documentElement.scrollHeight
+        - document.documentElement.clientHeight
+      const scrollPercentage = (scrollTop / windowHeight) * 100;
+      setScrollWidth(scrollPercentage);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  })
+
+  return (
+    <>
+      <div style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: `${scrollWidth}%`,
+        height: "10px",
+        background: "yellowgreen"
+      }}></div>
+    </>
+  )
+}
+
+const AlertTimer = () => {
+  const [showAlert, setShowAlert] = useState(true)
+
+  useEffect(() => {
+    const setTimeoutId = setTimeout(() => {
+      console.log(showAlert);
+      showAlert === true ? alert('시간 초과') : null
+    }, 3000)
+    return () => {
+      clearTimeout(setTimeoutId);
+    };
+  });
+
+  return (
+    <button onClick={() => setShowAlert(false)}>!! 빨리 클릭 !!</button>
+  )
+};
+
+export default App;
