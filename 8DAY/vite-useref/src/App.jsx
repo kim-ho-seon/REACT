@@ -12,7 +12,7 @@ return(
   </>
 );
 }
-export default App;
+
 
 const ControlledInput = () => {
   const [inputValue, setInputValue] = useState(' ')
@@ -59,3 +59,5 @@ const Counter = () => {
     </>
   );
 }
+
+export default App;
